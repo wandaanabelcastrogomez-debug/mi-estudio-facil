@@ -1,0 +1,19 @@
+{
+  "name": "Mi Estudio Fácil",
+  "short_name": "Mi Estudio",
+  "description": "Organiza tus materias, apuntes, tareas y exámenes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f7fc",
+  "theme_color": "#6d4bd1",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

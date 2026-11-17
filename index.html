@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6d4bd1">
+<meta name="description" content="Mi Estudio Fácil: organiza tus materias, apuntes, tareas y exámenes.">
+<title>Mi Estudio Fácil</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="brand-icon">📚</span><span>Mi Estudio <b>Fácil</b></span></a>
+  <button class="install-btn" id="installBtn" hidden>⬇ Instalar aplicación</button>
+</header>
+<div class="app-layout">
+<aside class="sidebar">
+  <p class="side-label">MENÚ PRINCIPAL</p>
+  <button class="nav-btn active" data-view="inicio">🏠 <span>Inicio</span></button>
+  <button class="nav-btn" data-view="materias">📘 <span>Mis materias</span></button>
+  <button class="nav-btn" data-view="apuntes">📝 <span>Mis apuntes</span></button>
+  <button class="nav-btn" data-view="examenes">✏️ <span>Exámenes</span></button>
+  <button class="nav-btn" data-view="tareas">📅 <span>Mis tareas</span></button>
+  <button class="nav-btn" data-view="progreso">📊 <span>Mi progreso</span></button>
+  <div class="sidebar-note"><span>💡</span><p>Un pequeño paso cada día te acerca a tus metas.</p></div>
+</aside>
+<main class="main-content">
+<section class="view active" id="view-inicio">
+  <div class="welcome"><div><p class="eyebrow">TU ESPACIO DE APRENDIZAJE</p><h1>¡Hola! 👋</h1><p>Bienvenido a <b>Mi Estudio Fácil</b>. ¿Qué aprenderás hoy?</p></div><div class="welcome-art">🎓</div></div>
+  <div class="stats-grid">
+    <article class="stat-card"><span class="stat-icon lilac">📘</span><div><p>Materias</p><strong id="statMaterias">0</strong></div></article>
+    <article class="stat-card"><span class="stat-icon peach">📝</span><div><p>Apuntes</p><strong id="statApuntes">0</strong></div></article>
+    <article class="stat-card"><span class="stat-icon mint">✏️</span><div><p>Exámenes realizados</p><strong id="statExamenes">0</strong></div></article>
+    <article class="stat-card"><span class="stat-icon sky">📅</span><div><p>Tareas pendientes</p><strong id="statTareas">0</strong></div></article>
+  </div>
+  <div class="section-heading"><div><p class="eyebrow">ORGANÍZATE</p><h2>Accesos rápidos</h2></div></div>
+  <div class="quick-grid">
+    <button class="quick-card" data-go="materias"><span>📘</span><b>Agregar materia</b><small>Organiza tus asignaturas</small></button>
+    <button class="quick-card" data-go="apuntes"><span>📝</span><b>Crear apunte</b><small>Guarda lo que aprendes</small></button>
+    <button class="quick-card" data-go="examenes"><span>✏️</span><b>Practicar examen</b><small>Pon a prueba tus conocimientos</small></button>
+    <button class="quick-card" data-go="tareas"><span>📅</span><b>Agregar tarea</b><small>Recuerda tus actividades</small></button>
+  </div>
+  <div class="tip-box"><span>🌟</span><div><b>Consejo para estudiar</b><p>Estudia en sesiones cortas, descansa unos minutos y repasa lo aprendido.</p></div></div>
+</section>
+<section class="view" id="view-materias">
+  <div class="page-heading"><p class="eyebrow">TUS ASIGNATURAS</p><h1>Mis materias</h1><p>Agrega y organiza las materias que estás estudiando.</p></div>
+  <form id="subjectForm" class="form-card"><label for="subjectName">Nombre de la materia</label><div class="form-row"><input id="subjectName" maxlength="60" placeholder="Ej. Matemáticas" required><button class="primary-btn">＋ Agregar materia</button></div></form>
+  <div id="subjectsList" class="item-grid"></div>
+</section>
+<section class="view" id="view-apuntes">
+  <div class="page-heading"><p class="eyebrow">TUS IDEAS Y RESÚMENES</p><h1>Mis apuntes</h1><p>Escribe y guarda información importante para estudiar.</p></div>
+  <form id="noteForm" class="form-card">
+    <label for="noteTitle">Título del apunte</label><input id="noteTitle" maxlength="80" placeholder="Ej. Introducción a HTML" required>
+    <label for="noteSubject">Materia</label><input id="noteSubject" maxlength="60" placeholder="Ej. Diseño web">
+    <label for="noteContent">Contenido</label><textarea id="noteContent" rows="5" placeholder="Escribe aquí tus apuntes..." required></textarea>
+    <button class="primary-btn">Guardar apunte</button>
+  </form><div id="notesList" class="item-grid"></div>
+</section>
+<section class="view" id="view-examenes">
+  <div class="page-heading"><p class="eyebrow">PRACTICA Y APRENDE</p><h1>Exámenes</h1><p>Crea tus propios cuestionarios y recibe tu calificación automáticamente.</p></div>
+  <div id="quizBuilder" class="form-card"><h2>Crear un examen</h2><label for="quizTitle">Nombre del examen</label><input id="quizTitle" maxlength="80" placeholder="Ej. Examen de HTML" required><div id="questionBuilder"></div><button class="secondary-btn" id="addQuestion" type="button">＋ Agregar pregunta</button><button class="primary-btn" id="saveQuiz" type="button">Guardar examen</button></div>
+  <div class="section-heading"><h2>Mis exámenes</h2></div><div id="quizzesList" class="item-grid"></div><div id="quizRunner" class="form-card" hidden></div>
+</section>
+<section class="view" id="view-tareas">
+  <div class="page-heading"><p class="eyebrow">PLANIFICA TU TIEMPO</p><h1>Mis tareas</h1><p>Anota tus actividades y marca las que hayas terminado.</p></div>
+  <form id="taskForm" class="form-card"><label for="taskName">Descripción de la tarea</label><input id="taskName" maxlength="120" placeholder="Ej. Estudiar el capítulo 2" required><label for="taskDate">Fecha límite</label><input id="taskDate" type="date"><button class="primary-btn">＋ Agregar tarea</button></form>
+  <div id="tasksList" class="item-list"></div>
+</section>
+<section class="view" id="view-progreso">
+  <div class="page-heading"><p class="eyebrow">MIRA CUÁNTO HAS AVANZADO</p><h1>Mi progreso</h1><p>Consulta tus exámenes y resultados guardados en este dispositivo.</p></div>
+  <div class="progress-summary" id="progressSummary"></div><div class="section-heading"><h2>Historial de exámenes</h2></div><div id="historyList" class="item-list"></div>
+</section>
+<footer>Mi Estudio Fácil · Aprende a tu ritmo 💜</footer>
+</main></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
